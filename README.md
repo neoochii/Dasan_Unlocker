@@ -22,7 +22,7 @@
 
 3. Reboot or power ON the device while RX and TX remain shorted.
 
-4. Wait a few seconds until the device enters unlock mode.
+4. Wait a few seconds until the device enters unlock mode.(Only pwr light will turn on in this mode , auth pon light wont )
 
 5. Remove the short from RX and TX.
 
