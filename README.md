@@ -28,7 +28,7 @@
 
 6. Connect your PC directly to any LAN port of the ONT
 
-7. Run `DASAN Unlock Tool` as Administrator.
+7. Run `DASAN Unlock Tool` as Administrator.(before that turn on tftp feature on windows , and turn off antivirus  google it if you dont know how)
 
 8. Select the Ethernet adapter connected to the ONT.
 
