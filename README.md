@@ -1,37 +1,127 @@
-### Confirmed Working
 
-- DASAN H660GM-A (Airtel GPON ONT)
-- ### DASAN H660GM-A Specifications
 
- GPON ONT
-- EcoNet / MediaTek EN7528 Platform
-- 4 × Gigabit LAN Ports
-- Dual-Band Wi-Fi (2.4GHz + 5GHz)
-- 1 × FXS Voice Port
-- 128MB Flash
-- 256MB DDR RAM
-- USB 2.0 Port
 
- ## Quick Unlock Procedure (DASAN H660GM-A)
 
-> ⚠️ Use only on supported DASAN H660GM-A devices.
+### Step 1: Enter Recovery Mode
 
-1. Power OFF the DASAN H660GM-A.
+1. Power OFF the router.
+2. Short the **RX** and **TX** test pads on the PCB.
+3. Power ON or reboot the router while keeping RX and TX shorted.
+4. Wait a few seconds for the device to enter recovery mode.
+5. Remove the short.
 
-2. Short the RX and TX test pads.
+---
 
-3. Reboot or power ON the device while RX and TX remain shorted.
+### Step 2: Configure Static IP
 
-4. Wait a few seconds until the device enters unlock mode.(Only pwr light will turn on in this mode , auth pon light wont )
+Set your PC's Ethernet adapter to:
 
-5. Remove the short from RX and TX.
+```text
+IP Address : 192.168.1.100
+Subnet Mask: 255.255.255.0
+Gateway    : 192.168.1.1
+```
 
-6. Connect your PC directly to any LAN port of the ONT
+---
 
-7. Run `DASAN Unlock Tool` as Administrator.(before that turn on tftp feature on windows , and turn off antivirus  google it if you dont know how)
+### Step 3: Verify Recovery Mode
 
-8. Select the Ethernet adapter connected to the ONT.
+Open Command Prompt:
 
-9.  Wait for the process to finish.
+```cmd
+ping 192.168.1.1
+```
 
-After completion, the device will reboot automatically.
+If the replies show:
+
+```text
+TTL=20
+```
+
+the router is in the correct recovery state and you can proceed.
+
+---
+
+### Step 4: Upload `tclinux.bin`
+
+Open Command Prompt in the directory containing `tclinux.bin` and run:
+
+```cmd
+tftp -i 192.168.1.1 PUT tclinux.bin
+```
+
+Wait for the upload to finish.
+
+The router should automatically reboot after processing the file.
+
+---
+
+### Step 5: Telnet Login
+
+After the router reboots, connect using Telnet:
+
+```cmd
+telnet 192.168.1.1
+```
+
+Login credentials:
+
+```text
+Username: admin
+Password: A!rTe7c
+```
+
+---
+
+### Step 6: Execute Commands
+
+After logging in, run:
+
+```sh
+bootcfg customer DASAN
+```
+
+Then:
+
+```sh
+prolinecmd restore default
+```
+
+---
+
+### Step 7: Reboot
+
+Reboot the router:
+
+```sh
+reboot
+```
+
+or power cycle the device.
+
+After reboot, the device should be initialized with the updated customer profile and default configuration.
+
+---
+
+## Troubleshooting
+
+### Ping Does Not Show `TTL=20`
+
+- Repeat the RX/TX shorting procedure.
+- Verify the static IP configuration.
+- Disable other network adapters.
+- Try another Ethernet cable.
+
+### TFTP Transfer Fails
+
+- Ensure `tclinux.bin` is in the current directory.
+- Verify the router responds at `192.168.1.1`.
+- Temporarily disable the firewall if necessary.
+
+### Telnet Login Fails
+
+- Wait several minutes after reboot.
+- Verify the device has completed booting.
+- Repeat the procedure from recovery mode if required. 
+
+AI is good btw
