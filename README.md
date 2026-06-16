@@ -68,7 +68,7 @@ Login credentials:
 
 ```text
 Username: admin
-Password: A!rTe7c
+Password: A!rTe7c / 1234 
 ```
 
 ---
