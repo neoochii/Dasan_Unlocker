@@ -105,6 +105,8 @@ After reboot, the device should be initialized with the updated customer profile
 
 ## Troubleshooting
 
+After Unlocking the router flash G_ONU_V3.2.2120054.bin latest firmware if you face performance issue 
+
 ### Ping Does Not Show `TTL=20`
 
 - Repeat the RX/TX shorting procedure.
